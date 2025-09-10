@@ -43,8 +43,11 @@ Aplikacija integrira oba modela (Model 1 i Model 2) u obliku web aplikacije s **
 
 ### Pokretanje servera (Flask backend)  
 cd server
+pip install -r requirements.txt
 python app.py
 
 ### Pokretanje klijenta (Angular frontend)  
 cd client
+npm install
 ng serve --proxy-config proxy.conf.json
+
