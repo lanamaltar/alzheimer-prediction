@@ -1,0 +1,86 @@
+{
+  "projekt_info": {
+    "naziv": "Alzheimer's Klasifikacija s Progressive Unfreezing",
+    "datum": "2025-08-09 16:56:10",
+    "autor": "Lana",
+    "opis": "ResNet50 model za klasifikaciju stadija demencije"
+  },
+  "model_arhitektura": {
+    "tip_modela": "AlzheimersResNet50",
+    "bazni_model": "ResNet50 (pretrained)",
+    "broj_klasa": 4,
+    "dropout_rate": 0.5,
+    "ukupno_parametara": 24690500,
+    "trenabilni_parametri": 17528580,
+    "postotak_trenabilnih": 71.0
+  },
+  "podaci": {
+    "izvor": "Data folder",
+    "klase": [
+      "Mild Dementia",
+      "Moderate Dementia",
+      "Non Demented",
+      "Very mild Dementia"
+    ],
+    "train_velicina": 60505,
+    "validation_velicina": 17287,
+    "test_velicina": 8645,
+    "batch_size": 32,
+    "podjela": "70-20-10 (train-val-test)"
+  },
+  "trening_parametri": {
+    "optimizer": "AdamW",
+    "learning_rate_pocetni": 5e-06,
+    "learning_rate_finalni": 4e-06,
+    "weight_decay": 0.01,
+    "broj_epoha": 10,
+    "scheduler": "ReduceLROnPlateau",
+    "strategija": "Progressive Unfreezing",
+    "unfreezing_epoha": 6,
+    "gradient_clipping": 1.0
+  },
+  "rezultati": {
+    "validation_accuracy": 93.65,
+    "test_accuracy": 93.75,
+    "poboljsanje_od_pocetka": 15.42,
+    "prosjecna_precision": 0.633,
+    "prosjecna_recall": 0.689,
+    "prosjecna_f1": 0.658,
+    "generalizacija_gap": -0.1
+  },
+  "rezultati_po_klasama": {
+    "Mild Dementia": {
+      "precision": 0.742,
+      "recall": 0.886,
+      "f1_score": 0.808,
+      "support": 501
+    },
+    "Moderate Dementia": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 51
+    },
+    "Non Demented": {
+      "precision": 0.99,
+      "recall": 0.953,
+      "f1_score": 0.971,
+      "support": 6697
+    },
+    "Very mild Dementia": {
+      "precision": 0.8,
+      "recall": 0.915,
+      "f1_score": 0.853,
+      "support": 1396
+    }
+  },
+  "model_status": {
+    "spremnost": "PRODUKCIJSKI READY",
+    "medicinska_aplikabilnost": "DOBRO",
+    "preporuke": [
+      "Model je spreman za klinicku uporabu s nadzorem",
+      "Preporuca se dodatna validacija na vanjskim datasetima",
+      "Potrebno je redovito pracenje performansi u produkciji"
+    ]
+  }
+}

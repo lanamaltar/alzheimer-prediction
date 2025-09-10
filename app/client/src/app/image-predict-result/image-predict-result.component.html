@@ -1,0 +1,187 @@
+<div id="result-card" class="form-card result-page-container" style="max-width: 600px; min-width: 260px; margin-top: 2rem;">
+  <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; margin-bottom: 1.2rem;">
+    <h2 class="mb-0" style="font-size: 1.5rem; font-weight: 700; color: #5b117e;">
+      Prediction Result
+    </h2>
+    <span *ngIf="timestamp" class="text-muted" style="font-size: 1rem;">
+      {{ timestamp | date:'medium' }}
+    </span>
+    <span *ngIf="predictionId" class="text-muted" style="font-size: 0.95rem;">ID: {{ predictionId }}</span>
+  </div>
+
+  <!-- Core prediction -->
+  <div style="margin-bottom: 1.2rem; text-align: center;">
+    <div style="font-size: 1.2rem; font-weight: 600; color: #5b117e;">
+      {{ result }}
+    </div>
+  <!-- Reliability removed from here; now only in explainability section below -->
+    <div *ngIf="confidence !== null" style="font-size: 1rem; color: #333;">
+      Confidence: {{ confidence | percent:'1.0-2' }}
+    </div>
+    <div *ngIf="entropy !== null" style="font-size: 1rem; color: #333;">
+      Entropy: {{ entropy | number:'1.2-2' }}
+    </div>
+  </div>
+
+
+  <!-- Class probabilities (ordered and normalized to clinical stage names) -->
+  <div *ngIf="probabilities && classNames" style="margin-bottom: 1.2rem;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f8f8f8;">
+          <th style="text-align: left; padding: 0.5em 0.7em; font-weight: 600; color: #5b117e;">Class</th>
+          <th style="text-align: right; padding: 0.5em 0.7em; font-weight: 600; color: #5b117e;">Probability</th>
+        </tr>
+      </thead>
+      <tbody>
+  <tr *ngFor="let stage of limitedStageOrder">
+          <td style="padding: 0.5em 0.7em;">{{ stage }}</td>
+          <td style="padding: 0.5em 0.7em; text-align: right; font-weight: 700; color: #5b117e;">
+            {{ getStageProbability(stage) | number:'1.0-2' }}%
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXPLAINABILITY & CONFIDENCE SECTION (STYLED) -->
+  <div style="margin-bottom: 1.2rem; font-size: 1.01rem; color: #333;">
+    <ng-container *ngIf="probabilities && classNames">
+      <ng-container *ngIf="getTop2Summary() as top2">
+  <table style="width: auto; margin-bottom: 1.1em; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding: 0.3em 0.7em; font-weight: 600; color: #111;">Top prediction</th>
+              <th style="text-align: left; padding: 0.3em 0.7em; font-weight: 600; color: #111;">Probability</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.3em 0.7em; color: #5b117e;">{{ top2[0].name }}</td>
+              <td style="padding: 0.3em 0.7em; color: #5b117e;">{{ top2[0].prob | number:'1.2-2' }}%</td>
+            </tr>
+            <tr *ngIf="top2[1]">
+              <td style="padding: 0.3em 0.7em; color: #5b117e;">{{ top2[1].name }}</td>
+              <td style="padding: 0.3em 0.7em; color: #5b117e;">{{ top2[1].prob | number:'1.2-2' }}%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin: 0.3em 0 0.6em 0.2em; color: #444; font-size: 0.97em;">
+          {{ getPlainExplanation() }}
+        </div>
+  <div style="margin: 0.2em 0 1.2em 0.2em; color: #5b117e; font-size: 0.97em;">
+          {{ getDementiaRuleExplanation() }}
+        </div>
+      </ng-container>
+    </ng-container>
+    <div *ngIf="reliability" style="margin-bottom: 1.1em;">
+      <span style="font-weight: 600; color: #111;">Reliability: <span style="color: #5b117e;">
+        <ng-container [ngSwitch]="reliability">
+          <ng-container *ngSwitchCase="'High'">Strong confidence</ng-container>
+          <ng-container *ngSwitchCase="'Medium'">Moderate confidence</ng-container>
+          <ng-container *ngSwitchCase="'Low'">Not definitive</ng-container>
+          <ng-container *ngSwitchDefault>{{ reliability }}</ng-container>
+        </ng-container>
+      </span></span>
+      <div *ngIf="reliability === 'Not definitive'" style="font-size: 0.97em; font-weight: 400; margin-left: 0.2em; margin-top: 0.3em; color: #444;">
+        The model could not make a clear distinction between the possible classes. Its confidence was spread out, so this result should be interpreted with caution.
+      </div>
+      <div *ngIf="reliability === 'Moderate'" style="font-size: 0.97em; font-weight: 400; margin-left: 0.2em; margin-top: 0.3em; color: #444;">
+        The model shows some preference for one class, but other classes still had noticeable probability. The result may be informative, but it is not fully certain.
+      </div>
+      <div *ngIf="reliability === 'Definitive'" style="font-size: 0.97em; font-weight: 400; margin-left: 0.2em; margin-top: 0.3em; color: #444;">
+        The model strongly favors one class over the others. This prediction is more reliable, though it should still not be taken as a medical diagnosis.
+      </div>
+    </div>
+
+  <div *ngIf="entropy !== null && entropy !== undefined" style="margin-bottom: 0.2em;">
+    <span style="font-weight: 600; color: #111;">Uncertainty (entropy): </span>
+    <span style="color: #5b117e; font-weight: 600;">{{ entropy | number:'1.2-2' }}</span>
+  </div>
+  <div *ngIf="entropy !== null && entropy !== undefined" style="font-size: 0.97em; color: #444; margin-bottom: 1.1em; margin-left: 0.2em;">
+    <ng-container>
+      <ng-container *ngIf="entropy < 0.5">
+        The model was very certain in its prediction.
+      </ng-container>
+      <ng-container *ngIf="entropy >= 0.5 && entropy < 0.9">
+        The model had moderate uncertainty in its prediction.
+      </ng-container>
+      <ng-container *ngIf="entropy >= 0.9">
+        The model’s uncertainty was high, so the result should be interpreted with caution.
+      </ng-container>
+    </ng-container>
+  </div>
+
+  </div>
+
+  <!-- Model info -->
+  <div *ngIf="modelInfo" style="margin-bottom: 1.2rem; font-size: 0.98rem; color: #444;">
+    <div><b>Model:</b> {{ modelInfo.architecture }}</div>
+    <table style="margin-top: 0.5rem; border-collapse: collapse; width: 100%; max-width: 400px;">
+      <tr *ngIf="modelInfo.validation_accuracy">
+        <td style="font-weight:600; color:#5b117e; padding: 0.3em 0.7em;">Validation accuracy</td>
+        <td style="padding: 0.3em 0.7em;">{{ modelInfo.validation_accuracy | number:'1.0-2' }}%</td>
+      </tr>
+      <tr *ngIf="modelInfo.test_accuracy">
+        <td style="font-weight:600; color:#5b117e; padding: 0.3em 0.7em;">Test accuracy</td>
+        <td style="padding: 0.3em 0.7em;">{{ modelInfo.test_accuracy | number:'1.0-2' }}%</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Input details -->
+  <div *ngIf="inputDetails" style="margin-bottom: 1.2rem; font-size: 0.98rem; color: #444;">
+    <div><b>Input:</b> {{ inputDetails.original_filename }} ({{ inputDetails.input_size[0] }}x{{ inputDetails.input_size[1] }})</div>
+    <table style="margin-top: 0.5rem; border-collapse: collapse; width: 100%; max-width: 400px;">
+      <tr>
+        <td style="font-weight:600; color:#5b117e; padding: 0.3em 0.7em;">Resize</td>
+        <td style="padding: 0.3em 0.7em;">{{ inputDetails.preprocessing.resize }}</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600; color:#5b117e; padding: 0.3em 0.7em;">Normalization mean</td>
+  <td style="padding: 0.3em 0.7em; white-space: nowrap; overflow-x: auto;">[{{ inputDetails.preprocessing.normalize_mean.join(', ') }}]</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600; color:#5b117e; padding: 0.3em 0.7em;">Normalization standard deviation</td>
+  <td style="padding: 0.3em 0.7em; white-space: nowrap; overflow-x: auto;">[{{ inputDetails.preprocessing.normalize_std.join(', ') }}]</td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngIf="downloadLinks?.original_image && gradCamUrl" class="gradcam-section" style="margin-bottom: 1.5em; text-align: center;">
+    <div style="font-weight: 600; margin-bottom: 0.5em;">Model attention (Grad-CAM):</div>
+    <div style="display: flex; justify-content: center; gap: 1.5em; align-items: flex-start; flex-wrap: wrap;">
+        <div>
+            <div style="font-size: 0.97em; margin-bottom: 0.3em; color: #444;">Original Input</div>
+            <img [src]="downloadLinks.original_image" alt="Original Input" style="max-width: 300px; border-radius: 8px; box-shadow: 0 2px 8px #0001;">
+        </div>
+        <div>
+            <div style="font-size: 0.97em; margin-bottom: 0.3em; color: #444;">Grad-CAM Overlay</div>
+            <img [src]="gradCamUrl" alt="Grad-CAM heatmap" style="max-width: 300px; border-radius: 8px; box-shadow: 0 2px 8px #0001;">
+        </div>
+    </div>
+    <div style="margin-top: 0.7em; font-size: 0.97em; color: #444; text-align: left; max-width: 480px; margin-left: auto; margin-right: auto;">
+      <span style="font-weight: 600; color: #5b117e;">How to interpret:</span>
+      This visualization shows which regions of the input image the model focused on when making its prediction. The warmer colors (red and yellow) highlight areas the model considered most important, while cooler colors (blue and green) mark regions with less influence.
+    </div>
+  </div>
+  <!-- Fallback: show only Grad-CAM if original not available -->
+  <div *ngIf="!downloadLinks?.original_image && gradCamUrl" class="gradcam-section" style="margin-bottom: 1.5em; text-align: center;">
+    <div style="font-weight: 600; margin-bottom: 0.5em;">Model attention (Grad-CAM):</div>
+    <img *ngIf="gradCamUrl" [src]="gradCamUrl" alt="Grad-CAM heatmap" style="max-width: 350px; border-radius: 8px; box-shadow: 0 2px 8px #0001;">
+    <div *ngIf="!gradCamUrl" style="color: #888; font-size: 0.9em;">Grad-CAM heatmap is not available.</div>
+  </div>
+
+  <div style="font-size: 0.93rem; color: #888; font-style: italic; margin-bottom: 0.7rem;">
+      Disclaimer: This tool does not provide a medical diagnosis. Please consult a healthcare professional.
+    </div>
+    
+    <!-- Footer -->
+    <div id="result-footer" style="display: flex; gap: 1.2em; align-items: center;">
+      <button class="landing-btn" (click)="printResultCardViaBrowser()">Print</button>
+      <!--<button class="landing-btn" (click)="printResultCardAsPDF()">Download PDF</button>-->
+      <a [routerLink]="'/history'" style="margin-left: auto; color: #5b117e; text-decoration: underline; font-size: 0.98em;">View history</a>
+    </div>
+
+  
+</div>

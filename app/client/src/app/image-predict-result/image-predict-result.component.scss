@@ -1,0 +1,33 @@
+.form-card.result-page-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px rgba(91, 17, 126, 0.08);
+}
+
+h2 {
+  color: #5b117e;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.text-muted {
+  color: #888;
+}
+
+.landing-btn {
+  background: rgba(91, 17, 126, 0.849);
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.landing-btn:hover {
+  background: #d1c4e9;
+}

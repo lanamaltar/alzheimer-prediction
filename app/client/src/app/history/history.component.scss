@@ -1,0 +1,84 @@
+.history { padding: 1rem; }
+.history h2 { text-align: center; color: #5b117e; margin-bottom: 1rem; }
+.history h3 { color: #5b117e; font-weight: 700; }
+.history-table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 12px rgba(91,17,126,0.1); border-radius: 0.75rem; overflow: hidden; }
+.history-table th, .history-table td { padding: 0.75rem; border-bottom: 1px solid #f0eaff; text-align: left; }
+.history-table thead th { background: #f5efff; color: #5b117e; font-weight: 700; }
+.thumb { width: 72px; height: 72px; object-fit: cover; border-radius: 0.5rem; border: 1px solid #ede7f6; }
+.thumb.clickable { cursor: zoom-in; }
+.empty { text-align: center; padding: 2rem; color: #b39ddb; }
+.actions { display: flex; justify-content: center; margin-top: 1rem; }
+.load-more { background: #b99fe9; color: #fff; border: none; border-radius: 1.5rem; padding: 0.6rem 1.5rem; font-weight: 600; cursor: pointer; }
+.load-more:hover { background: #a084ca; }
+.error { color: #b00020; text-align: center; margin-bottom: 1rem; }
+
+.details-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+.details-grid details {
+	background: #faf7ff;
+	border: 1px solid #efe7ff;
+	border-radius: 0.5rem;
+	padding: 0.5rem 0.75rem;
+}
+.details-grid table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.details-grid td {
+	padding: 0.25rem 0.4rem;
+	border-bottom: 1px dashed #eee7ff;
+}
+.details-grid tr:last-child td { border-bottom: none; }
+
+@media (max-width: 720px) {
+	.details-grid { grid-template-columns: 1fr; }
+}
+
+/* Lightbox overlay */
+.lightbox {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,0.75);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 2rem;
+}
+.lightbox-content {
+	position: relative;
+	max-width: 96vw;
+	max-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.lightbox-content img {
+	max-width: 100%;
+	max-height: 85vh;
+	border-radius: 0.5rem;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.lightbox-close {
+	position: absolute;
+	top: -0.5rem;
+	right: -0.5rem;
+	background: #ffffff;
+	border: none;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 999px;
+	font-size: 1.25rem;
+	line-height: 2rem;
+	text-align: center;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.caption {
+	color: #eee;
+	margin-top: 0.5rem;
+	font-size: 0.95rem;
+}

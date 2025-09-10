@@ -1,0 +1,198 @@
+<div class="form-card result-page-container" style="max-width: 600px; min-width: 260px; margin-top: 2rem;">
+  <!-- Header -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; margin-bottom: 1.2rem;">
+    <h2 class="mb-0" style="font-size: 1.5rem; font-weight: 700; color: #5b117e;">
+      Prediction Result
+    </h2>
+    <span *ngIf="timestamp" class="text-muted" style="font-size: 1rem;">
+      {{ timestamp | date:'medium' }}
+    </span>
+  </div>
+
+  <!-- Probabilities -->
+  <table *ngIf="probabilities && probabilities.length === 2" style="width: 100%; margin-bottom: 1.2rem; border-collapse: collapse;">
+    <thead>
+      <tr style="background: #f8f8f8;">
+        <th style="text-align: left; padding: 0.5em 0.7em; font-weight: 600; color: #5b117e;">Class</th>
+        <th style="text-align: right; padding: 0.5em 0.7em; font-weight: 600; color: #5b117e;">Probability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.5em 0.7em;">Alzheimer's Disease</td>
+        <td style="padding: 0.5em 0.7em; text-align: right; font-weight: 700; color: #5b117e;">{{ (probabilities[1] * 100) | number:'1.0-0' }}%</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.5em 0.7em;">Normal</td>
+        <td style="padding: 0.5em 0.7em; text-align: right; font-weight: 700; color: #5b117e;">{{ (probabilities[0] * 100) | number:'1.0-0' }}%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Prediction summary -->
+  <div style="margin: 1.1rem 0 1.2rem 0; font-size: 1.08rem; color: #222;">
+    <ng-container *ngIf="result === 1 && confidenceTier && probabilities">
+      The model predicts <b>Alzheimer’s Disease</b> with <b>{{ confidenceTier.toLowerCase() }}</b> confidence ({{ (probabilities[1] * 100) | number:'1.0-0' }}%). This result was influenced most by {{ getTopFeaturesString() }}. Lower MMSE and brain volume (nWBV) are often linked to higher risk.
+    </ng-container>
+    <ng-container *ngIf="result === 0 && confidenceTier && probabilities">
+      The model predicts <b>Normal</b> with <b>{{ confidenceTier.toLowerCase() }}</b> confidence ({{ (probabilities[0] * 100) | number:'1.0-0' }}%). Strongest support from {{ getTopFeaturesString() }}.
+    </ng-container>
+  <div *ngIf="getCdrAlzExplanation() as cex" style="margin-top: 0.5rem; color: #5b117e; font-size: 1.0rem;">{{ cex }}</div>
+  </div>
+
+  <!-- Entered data -->
+  <div *ngIf="features && featureNames && featureNames.length > 0" style="margin-bottom: 1.2rem;">
+    <h5 class="entered-data" style="color: #5b117e; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Entered data</h5>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.2em 1.2em; font-size: 1rem;">
+      <ng-container *ngFor="let name of featureNames; let i = index">
+        <div style="font-weight: 600; color: #333;">{{ name }}</div>
+        <div style="color: #666;">
+          <ng-container [ngSwitch]="i">
+            <span *ngSwitchCase="2">{{ features[i] === 0 ? 'Female' : 'Male' }}</span>
+            <span *ngSwitchCase="4">{{ features[i] }} years</span>
+            <span *ngSwitchCase="6">{{ features[i] }}/30</span>
+            <span *ngSwitchCase="7">{{ features[i] | number:'1.0-0' }} cm³</span>
+            <span *ngSwitchDefault>{{ features[i] }}</span>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Key influencing features -->
+  <div *ngIf="featureImportance && featureImportance.length > 0" style="margin-bottom: 1.2rem;">
+    <h4 class="result-explanation" style="color: #5b117e; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Key influencing features</h4>
+    <ng-container *ngFor="let feat of featureImportance.slice(0,3); let i = index">
+      <div *ngIf="feat.weight !== 0" style="display: flex; align-items: center; margin-bottom: 0.4rem;">
+        <span style="width: 120px; font-weight: 600; color: #333;">{{ feat.name }}</span>
+        <div style="background: #eee; border-radius: 0.5rem; height: 14px; width: 120px; margin: 0 0.5rem; position: relative;">
+          <div style="background: #5b117e; height: 100%; border-radius: 0.5rem;" [style.width.%]="getFeatureBarWidth(feat.weight)"></div>
+        </div>
+        <span style="color: #888; font-size: 0.97em; margin-left: 0.5em;">({{ getFeatureUserValue(feat.name) }})</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Relative Feature Contributions -->
+  <div *ngIf="filteredFeatureContributions.length > 0" style="margin-bottom: 1.2rem;">
+    <h4 style="color: #5b117e; font-size: 1.08rem; font-weight: 600; margin-bottom: 0.5rem;">Relative Feature Contributions</h4>
+    <div style="display: flex; justify-content: center;">
+      <div style="background: #faf7fc; border: 1px solid #e5e5e5; border-radius: 0.7rem; padding: 1.1em 1.2em; width: 100%; max-width: 440px;">
+        <canvas #barChartCanvas width="420" height="140" style="width:100%;max-width:420px;display:block;"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Percentiles -->
+  <div *ngIf="(featurePercentiles || []).length > 0" style="margin-bottom: 1.2rem;">
+    <h4 style="color: #5b117e; font-size: 1.08rem; font-weight: 600; margin-bottom: 0.5rem;">Your Input Percentiles</h4>
+    <div style="font-size: 0.97em; color: #555; margin-bottom: 0.4em;">Shows where your value falls compared to the population.</div>
+    <table style="width: 100%; font-size: 0.98rem;">
+      <thead>
+        <tr style="background: #f8f8f8;"><th style="text-align:left;">Feature</th><th style="text-align:right;">Percentile</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fp of featurePercentiles">
+          <td>{{ fp.name }}</td>
+          <td style="text-align:right;">{{ fp.percentile | number:'1.0-1' }}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Feature Commentary -->
+  <div *ngIf="(featureCommentary || []).length > 0" style="margin-bottom: 1.2rem;">
+    <table style="width: 100%; font-size: 0.98rem; border-collapse: collapse; border: 1px solid #e5e5e5;">
+      <thead>
+        <tr style="background: #f8f8f8;">
+          <th style="text-align:left; border-bottom: 1px solid #e5e5e5; padding: 0.5em 0.7em;">Feature</th>
+          <th style="border-bottom: 1px solid #e5e5e5; padding: 0.5em 0.7em; background: #f8f8f8;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fc of featureCommentary; let i = index" [ngStyle]="{ 'background': i % 2 === 0 ? '#faf7fc' : '#fff' }">
+          <td style="padding: 0.5em 0.7em; border-bottom: 1px solid #f0e9f5;">{{ fc.name }}</td>
+          <td style="padding: 0.5em 0.7em; border-bottom: 1px solid #f0e9f5;">{{ fc.comment }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Model Internals -->
+  <div *ngIf="modelInternals && (modelInternals.coefficients?.length || modelInternals.zScores?.length || (modelInternals.logitMargin != null && !isNaN(modelInternals.logitMargin)))" style="margin-bottom: 1.2rem;">
+    <h4 style="color: #5b117e; font-size: 1.08rem; font-weight: 600; margin-bottom: 0.5rem;">Feature Contributions Details</h4>
+    <div style="font-size: 0.97em; color: #555; margin-bottom: 0.4em;">How the model uses each feature internally.</div>
+    <div style="font-size: 0.97em; color: #555; margin-top: 0.6em;">
+      Coefficient shows how strongly the model uses a feature. A positive coefficient means the feature increases the likelihood of dementia, while a negative coefficient means it decreases the likelihood. If the coefficient is zero, the feature is not used by the model.
+      <br><br>
+      Z-score shows how far the person’s value is from the average in the population. A score close to zero means average, a positive score means higher than average, and a negative score means lower than average.
+    </div>
+    <div style="height: 0.7em;"></div>
+    <table style="width: 100%; font-size: 0.98rem;">
+      <thead>
+        <tr style="background: #f8f8f8;">
+          <th style="text-align:left;">Feature</th>
+          <th style="text-align:right;">Coefficient</th>
+          <th style="text-align:right;">Z-score</th>
+          <th style="text-align:right;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coef of modelInternals.coefficients; let i = index">
+          <td>{{ coef.name }}</td>
+          <td style="text-align:right;">
+            <ng-container *ngIf="abs(coef.value) >= 1e-6; else zeroCoef">
+              {{ coef.value | number:'1.3-3' }}
+            </ng-container>
+            <ng-template #zeroCoef>
+              <span style="color:#bbb;">0</span>
+            </ng-template>
+          </td>
+          <td style="text-align:right;">
+            {{ modelInternals.zScores && modelInternals.zScores[i] ? (modelInternals.zScores[i].value | number:'1.2-2') : '' }}
+          </td>
+          <td style="text-align:right;">
+            <ng-container *ngIf="abs(coef.value) < 1e-6; else usedByModel">
+              <span style="color:#a084ca;">Not used by model</span>
+            </ng-container>
+            <ng-template #usedByModel>
+              <span style="color:#5b117e;">Used</span>
+            </ng-template>
+          </td>
+        </tr>
+        <tr *ngIf="modelInternals.logitMargin != null && !isNaN(modelInternals.logitMargin)">
+          <td colspan="3" style="font-weight:600;">Logit margin</td>
+          <td style="text-align:right; color: #5b117e;">{{ modelInternals.logitMargin | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Reliability Score -->
+  <div *ngIf="reliabilityScore != null && !isNaN(reliabilityScore)" style="margin-bottom: 1.2rem;">
+    <h4 style="color: #5b117e; font-size: 1.08rem; font-weight: 600; margin-bottom: 0.5rem;">Reliability Score</h4>
+    <div style="font-size: 1.01em; color: #222;">Reliability score: <b>{{ reliabilityScore | number:'1.2-2' }}</b></div>
+    <div style="font-size: 0.97em; color: #555;">How much the model “trusts” this prediction.</div>
+  </div>
+
+  <!-- Model Information -->
+  <div style="color: #5b117e; font-size: 1rem; padding: 0.5rem 0;">Model: Logistic Regression</div>
+  <div style="color: #5b117e; font-size: 1rem; padding: 0.5rem 0;">Accuracy: 96.00%</div>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.2rem; width: 100%;">
+    <div style="font-size: 0.95rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 1.2em;">
+      <span *ngIf="predictionId" style="font-family: monospace;">ID: {{ predictionId }}</span>
+    </div>
+    <div style="font-size: 0.93rem; color: #888; font-style: italic; margin-bottom: 0.7rem;">
+      Disclaimer: This tool does not provide a medical diagnosis. Please consult a healthcare professional.
+    </div>
+    <div id="footer-actions" style="display: flex; gap: 1.2em; align-items: center;">
+      <button class="predict-btn" (click)="printResultCardViaBrowser()">Print</button>
+      <a [routerLink]="'/history'" style="margin-left: auto; color: #5b117e; text-decoration: underline; font-size: 0.98em;">View history</a>
+    </div>
+  </div>
+</div>
+
+

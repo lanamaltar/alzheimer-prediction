@@ -1,0 +1,105 @@
+<div class="shell-layout">
+  <header class="shell-header">
+    <div class="logo" style="display: flex; align-items: center;">
+      BrainScan
+      <img src="/assets/ikona.png" alt="App Icon" style="width: 40px; height: 40px; margin-left: 0.5rem; border-radius: 12px;" />
+    </div>
+    <div class="user-menu"></div>
+  </header>
+
+  <nav class="sidebar" [class.open]="sidebarOpen">
+    <div class="logo-details">
+      <div class="logo_name">BrainScan</div>
+      <i [ngClass]="sidebarOpen ? 'bx bx-menu-alt-right' : 'bx bx-menu'" id="btn" (click)="toggleSidebar()"></i>
+    </div>
+    <ul class="nav-list">
+      
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active">
+          <i class="bx bx-grid-alt"></i>
+          <span class="links_name">Home</span>
+        </a>
+        <span class="tooltip">Home</span>
+      </li>
+      <li>
+        <a routerLink="/predict/image" routerLinkActive="active">
+          <i class="bx bx-pie-chart-alt-2"></i>
+          <span class="links_name">MRI Prediction</span>
+        </a>
+        <span class="tooltip">MRI Prediction</span>
+      </li>
+      <li>
+        <a routerLink="/predict/numeric" routerLinkActive="active">
+          <i class="bx bx-bar-chart-alt-2"></i>
+          <span class="links_name">Numeric Prediction</span>
+        </a>
+        <span class="tooltip">Numeric Prediction</span>
+      </li>
+      <li>
+        <a routerLink="/history" routerLinkActive="active">
+          <i class="bx bx-folder"></i>
+          <span class="links_name">History</span>
+        </a>
+        <span class="tooltip">History</span>
+      </li>
+      <li class="profile">
+        <div class="profile-details">
+          <div class="name_job">
+            <div class="name">Logged In</div>
+            <div class="job">{{ userName }}</div>
+          </div>
+        </div>
+        <i class="bx bx-log-out" id="log_out" (click)="openLogoutModal()"></i>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="shell-content with-sidebar" [class.sidebar-open]="sidebarOpen">
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!-- Logout Confirmation Modal -->
+  <div *ngIf="showLogoutModal" class="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+    <div class="modal-content" style="background: #f3e5f5; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center;">
+      <h3 style="color: #6b4ea4; margin-bottom: 1rem; font-size: 1.5rem;">Confirm Logout</h3>
+      <p style="margin-bottom: 1.5rem; color: #6b4ea4; font-size: 1rem;">Are you sure you want to log out?</p>
+      <div style="display: flex; justify-content: center; gap: 1rem;">
+        <button (click)="confirmLogout()" style="background: #9575cd; color: #fff; border: none; padding: 0.8rem 3rem; border-radius: 1rem; font-size: 1rem; cursor: pointer; transition: background 0.3s;">Yes</button>
+        <button (click)="closeLogoutModal()" style="background: #9575cd; color: #fff; border: none; padding: 0.8rem 3rem; border-radius: 1rem; font-size: 1rem; cursor: pointer; transition: background 0.3s;">No</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .logout-btn:hover {
+      background: #b39ddb;
+    }
+  </style>
+</div>
+
+<script>
+  // Ensure Angular's Router is properly injected
+  class ShellComponent {
+    constructor(router) {
+      this.router = router;
+    }
+
+    openLogoutModal() {
+      this.showLogoutModal = true;
+    }
+
+    closeLogoutModal() {
+      this.showLogoutModal = false;
+    }
+
+    confirmLogout() {
+      // Perform logout logic here
+      console.log('User logged out');
+      this.showLogoutModal = false; // Close the modal after logout
+      // Navigate to the login page
+      this.router.navigate(['/login']);
+    }
+  }
+</script>

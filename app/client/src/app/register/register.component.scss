@@ -1,0 +1,99 @@
+// Center the form vertically and horizontally
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+:host {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #faf6fd 0%, #ede7f6 100%);
+}
+
+.auth-center { width: 100%; display: flex; justify-content: center; }
+
+.auth-form {
+	max-width: 400px;
+	width: 100%;
+	background: #fff;
+	border-radius: 1rem;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+	padding: 2rem 2rem 1.5rem 2rem;
+	margin: 2rem 0;
+	text-align: center;
+}
+
+.auth-title { text-align: center; margin-bottom: 1rem; color: #5b117e; font-family: 'Poppins', sans-serif; }
+
+.form-label, .auth-form label {
+	display: block;
+	font-weight: 600;
+	color: #2d3a4b;
+	margin-bottom: 0.5rem;
+	text-align: center;
+}
+
+.form-control, .auth-form input {
+	border-radius: 0.5rem;
+	border: 1px solid #d1d5db;
+	font-size: 1rem;
+	padding: 0.75rem 1rem;
+	margin-bottom: 0.5rem;
+	margin-top: 0.15rem;
+	width: 100%;
+	max-width: 320px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.form-control {
+	border-radius: 0.5rem;
+	border: 1px solid #d1d5db;
+	font-size: 1rem;
+	padding: 0.75rem 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.btn-primary, button, .register-btn, .auth-button {
+  min-width: 140px;
+  font-size: 1.1rem;
+  padding: 0.75rem 2.2rem;
+  border: none;
+  border-radius: 2rem;
+  //background: #b99fe9; /* Updated button color */
+  background: #8f63e1;
+  color: #fff; /* Adjusted text color for contrast */
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.1);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  outline: none;
+  cursor: pointer;
+  display: block; /* Ensure the button is centered */
+  margin: 1.5rem auto; /* Center horizontally and add spacing */
+  width: 100%; /* Increase button width */
+	max-width: 320px; /* Limit maximum width */
+}
+
+.btn-primary:hover, button:hover, .register-btn:hover, .auth-button:hover {
+  background: #7a4fb3; /* Slightly darker shade on hover */
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.13);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.alert {
+	border-radius: 0.5rem;
+	font-size: 1rem;
+	padding: 0.75rem 1rem;
+	max-width: 320px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.alert-success {
+	background: #e6f9ed;
+	color: #217a3c;
+	border: 1px solid #b6e7c9;
+}
+.alert-danger {
+	background: #fdeaea;
+	color: #a94442;
+	border: 1px solid #f5c6cb;
+}

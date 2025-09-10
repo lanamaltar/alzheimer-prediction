@@ -1,0 +1,13 @@
+{
+  "model_type": "LogisticRegression",
+  "model_description": "Optimized LogisticRegression (GridSearchCV, anti-leakage pipeline)",
+  "train_datetime": "2025-09-06T19:24:40.719576",
+  "model_version": "1.0",
+  "n_features": 10,
+  "best_params": {
+    "clf__C": 0.1,
+    "clf__penalty": "l1",
+    "clf__solver": "liblinear"
+  },
+  "cv_best_balanced_accuracy": 0.9422914349276974
+}

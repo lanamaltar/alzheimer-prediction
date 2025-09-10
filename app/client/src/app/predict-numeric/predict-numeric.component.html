@@ -1,0 +1,270 @@
+<div class="container-fluid py-4">
+  <h2 style="color: #5b117e; font-size: 1.8rem; font-weight: bold; text-align: center; margin-bottom: 2rem; margin-top: 2rem;">Model Information</h2>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="d-grid" style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center; margin-left: 0;">
+        <div class="model-info-grid">
+          <div class="model-info-card" style="background: linear-gradient(135deg, #e8def8, #c5a4d8);">
+            <img src="assets/5.png" alt="Dataset" style="width: 22%; border-radius: 1rem; object-fit: cover;">
+            <div style="flex: 1; padding-left: 1rem; display: flex; flex-direction: column; justify-content: center;">
+              <h3 style="color: #5b117e; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; font-size: 1.1rem; margin-bottom: 0.8rem;">Dataset</h3>
+              <p style="color: #333; font-size: 0.95rem; line-height: 1.5; text-align: justify; margin: 0;">
+                Core features of the dataset:
+              </p>
+              <ul style="list-style: none; padding-left: 0.8rem; margin: 0.8rem 0 0 0;">
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Unique IDs:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Each subject and MRI exam identified</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Diagnosis Status:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Labeled as Normal or Alzheimer’s disease</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Longitudinal Timing:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Visit sequence and MR delay tracked</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Demographics:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Includes gender, age, education and SES</span>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="model-info-card" style="background: linear-gradient(135deg, #ede7f6, #d1c4e9);">
+            <img src="assets/13.png" alt="Data Preprocessing" style="width: 22%; border-radius: 1rem; object-fit: cover;">
+            <div style="flex: 1; padding-left: 1rem; display: flex; flex-direction: column; justify-content: center;">
+              <h3 style="color: #5b117e; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; font-size: 1.1rem; margin-bottom: 0.8rem;">Data Preprocessing</h3>
+              <p style="color: #333; font-size: 0.95rem; line-height: 1.5; text-align: justify; margin: 0;">
+                Key steps were taken to prepare the data for analysis:
+              </p>
+              <ul style="list-style: none; padding-left: 0.8rem; margin: 0.8rem 0 0 0;">
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Missing Values:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Filled using the median value</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Irrelevant Columns:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Excluded to reduce noise</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Redundant Categories:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Merged for simplicity</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Categorical Data:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Encoded numerically</span>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="model-info-card" style="background: linear-gradient(135deg, #ede7f6, #d1c4e9);">
+            <img src="assets/14.png" alt="Feature Selection" style="width: 22%; border-radius: 1rem; margin-right: 1rem; object-fit: cover;">
+            <div style="flex: 1;">
+              <h3 style="color: #5b117e; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; font-size: 1.1rem; margin-bottom: 0.8rem;">Feature Selection</h3>
+              <p style="color: #333; font-size: 0.95rem; line-height: 1.5; text-align: justify;">
+                The model focused on the most impactful features:<br>
+              </p>
+              <ul style="list-style: none; padding-left: 0.8rem; margin: 0.8rem 0 0 0;">
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Demographics:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Age, Education, Gender (M/F), SES</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Clinical:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">MMSE, CDR</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• MRI Measures:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">MR Delay, eTIV, nWBV, ASF</span>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="model-info-card" style="background: linear-gradient(135deg, #e8def8, #c5a4d8);">
+            <img src="assets/15.png" alt="Model Training" style="width: 22%; border-radius: 1rem; margin-right: 1rem; object-fit: cover;">
+            <div style="flex: 1;">
+              <h3 style="color: #5b117e; font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; font-size: 1.1rem; margin-bottom: 0.8rem;">Model Training</h3>
+              <p style="color: #333; font-size: 0.95rem; line-height: 1.5; text-align: justify;">
+                The training process ensured robust model performance:<br>
+              </p>
+              <ul style="list-style: none; padding-left: 0.8rem; margin: 0.8rem 0 0 0;">
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Workflow:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Implemented using Scikit-learn</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Data Split:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Train/Test split for evaluation</span>
+                <li style="margin-bottom: 0.4rem; color: #5b117e; font-weight: bold; font-size: 0.95rem;">• Model:</li>
+                <span style="color: #333; font-size: 0.95rem; padding-left: 2rem; display: inline-block;">Logistic Regression classifier</span>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <br>
+  <br>
+  
+  <div class="row justify-content-center">
+    <!-- Form right -->
+    <div class="col-12 col-md-7 col-lg-6 d-flex align-items-stretch">
+      <div class="explanation-and-form">
+        <h3 class="explanation-title">What does this form do?</h3>
+        <br>
+        <div class="form-and-result">
+          <div class="form-container">
+            <!-- Existing form code -->
+            <form (ngSubmit)="onSubmit()" #numericForm="ngForm" class="form-card w-100" style="max-width: 600px; min-width: 300px; margin-top: 0; padding-top: 0; font-size: 1.3rem;">
+              <div class="mb-3" *ngFor="let value of featuresInput; let i = index; trackBy: trackByIndex" [ngStyle]="{ 'margin-top': i === 0 ? '1.1rem' : '' }">
+                <div class="form-section">
+                  <label class="form-label mb-1" style="font-size: 1.3rem; font-weight: bold; color: rgba(91, 17, 126, 0.849);">
+                    {{ featureNames[i] }}
+                  </label>
+                  <div class="text-muted mb-2" style="font-size: 1rem;">
+                    <ng-container [ngSwitch]="i">
+                      <div *ngSwitchCase="0">
+                        Number of days since the subject’s initial baseline MRI scan.
+                      </div>
+                      <div *ngSwitchCase="1">
+                        A scale measuring severity of dementia.
+                        <ul style="margin-bottom: 0.5em; margin-top: 0.3em;">
+                          <li>0 = No Dementia</li>
+                          <li>0.5 = Very Mild Dementia</li>
+                          <li>1 = Mild Dementia</li>
+                          <li>2 = Moderate Dementia</li>
+                          <li>3 = Severe Dementia</li>
+                        </ul>
+                      </div>
+                      <div *ngSwitchCase="2">
+                        Indicates the subject's gender:
+                        <ul style="margin-bottom: 0.5em; margin-top: 0.3em;">
+                          <li>0 = Female</li>
+                          <li>1 = Male</li>
+                        </ul>
+                      </div>
+                      <div *ngSwitchCase="3">
+                        Participant’s age at time of scan.
+                      </div>
+                      <div *ngSwitchCase="4">
+                        Number of years of formal education.
+                      </div>
+                      <div *ngSwitchCase="5">
+                        SES is a score from 1 (highest: more education/professional jobs) to 5 (lowest: less education/unskilled jobs), based on the Hollingshead Index.
+                      </div>
+                      <div *ngSwitchCase="6">
+                        Cognitive test, score 0–30.
+                        <ul style="margin-bottom: 0.5em; margin-top: 0.3em;">
+                          <li>24–30 = Normal</li>
+                          <li>18–23 = Mild cognitive impairment</li>
+                          <li>0–17 = Severe impairment</li>
+                        </ul>
+                      </div>
+                      <div *ngSwitchCase="7">
+                        Volume of the cranial cavity (cm³).
+                      </div>
+                      <div *ngSwitchCase="8">
+                        Brain volume relative to intracranial volume.
+                      </div>
+                      <div *ngSwitchCase="9">
+                        Scaling factor used to match an individual’s brain to a standard atlas.
+                      </div>
+                    </ng-container>
+                  </div>
+                  <div class="input-container">
+                    <ng-container [ngSwitch]="i">
+                      <!-- CDR dropdown -->
+                      <select *ngSwitchCase="1" class="form-control" required [(ngModel)]="featuresInput[i]" [name]="'feature' + i" style="max-width: 300px; font-size: 1.2rem;">
+                        <option [ngValue]="0">0</option>
+                        <option [ngValue]="0.5">0.5</option>
+                        <option [ngValue]="1">1</option>
+                        <option [ngValue]="2">2</option>
+                        <option [ngValue]="3">3</option>
+                      </select>
+                      <!-- M/F dropdown -->
+                      <select *ngSwitchCase="2" class="form-control" required [(ngModel)]="featuresInput[i]" [name]="'feature' + i" style="max-width: 300px; font-size: 1.2rem;">
+                        <option [ngValue]="0">0</option>
+                        <option [ngValue]="1">1</option>
+                      </select>
+                      <!-- SES dropdown -->
+                      <select *ngSwitchCase="5" class="form-control" required [(ngModel)]="featuresInput[i]" [name]="'feature' + i" style="max-width: 300px; font-size: 1.2rem;">
+                        <option [ngValue]="1">1</option>
+                        <option [ngValue]="2">2</option>
+                        <option [ngValue]="3">3</option>
+                        <option [ngValue]="4">4</option>
+                        <option [ngValue]="5">5</option>
+                      </select>
+                      <!-- All other fields as number -->
+                      <input *ngSwitchDefault
+                        type="number"
+                        step="any"
+                        inputmode="decimal"
+                        class="form-control"
+                        required
+                        [(ngModel)]="featuresInput[i]"
+                        [name]="'feature' + i"
+                        style="max-width: 300px; font-size: 1.2rem;"
+                      />
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="predict-btn" [disabled]="numericForm.invalid || loading" style="font-size: 1.3rem;">
+                {{ loading ? 'Predicting...' : 'Predict' }}
+              </button>
+              <div *ngIf="error" class="alert alert-danger mt-3" style="font-size: 1.2rem;">
+                {{ error }}
+              </div>
+            </form>
+          </div>
+          <div class="explanation">
+            <ul>
+              <li>When the user submits their data, the system returns a comprehensive prediction report with the following elements.</li>
+              <li><strong>Prediction Result</strong><br>Alzheimer’s disease vs Normal classification. Probability score for each class.</li>
+              <li><strong>Entered Data</strong><br>Shows all input values provided by the user.</li>
+              <li><strong>Key Influencing Features</strong><br>Highlights the most impactful features for the individual prediction.</li>
+              <li><strong>Relative Feature Contributions</strong><br>A bar chart displays how much each feature contributed to the model’s decision.</li>
+              <li><strong>Input Percentiles</strong><br>Compares the user’s values with the population.</li>
+              <li><strong>Feature Insights</strong><br>Explains whether each input is higher, lower, or close to average compared to reference data.</li>
+              <li><strong>Feature Contribution Details</strong><br>Provides coefficients, Z-scores, and indicates whether each feature was used by the model.</li>
+              <li><strong>Reliability Score</strong><br>A numeric score indicating the model’s confidence in this prediction.</li>
+              <li><strong>Model Info & Accuracy</strong><br>States which algorithm was used. Reports validation and test accuracy percentages.</li>
+              <li>The result card with all prediction details is automatically displayed below the form once the user submits their data.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Result card below -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-12 col-md-10">
+     <app-numeric-prediction-result
+        *ngIf="result !== null"
+        [result]="result"
+        [probabilities]="probabilities"
+        [predictionLabel]="predictionLabel"
+        [featureImportance]="featureImportance"
+        [features]="features"
+        [featureNames]="featureNames"
+        [predictionId]="predictionId"
+        [timestamp]="timestamp"
+        [featureContributions]="featureContributions"
+        [featurePercentiles]="featurePercentiles"
+        [probabilityThreshold]="probabilityThreshold"
+        [calibrationNote]="calibrationNote"
+        [lowConfidenceFlag]="lowConfidenceFlag"
+        [featureCommentary]="featureCommentary"
+        [modelInternals]="modelInternals"
+        [modelCalibration]="modelCalibration"
+        [reliabilityScore]="reliabilityScore"
+      >
+        <div *ngIf="modelInternals && (modelInternals.architecture || modelInternals.validation_accuracy || modelInternals.test_accuracy)" style="margin-bottom: 1.2rem; font-size: 0.98rem; color: #444;">
+          <div *ngIf="modelInternals.architecture"><b>Model:</b> {{ modelInternals.architecture }}</div>
+          <table style="margin-top: 0.5rem; border-collapse: collapse; width: 100%; max-width: 400px;">
+            <tr *ngIf="modelInternals.validation_accuracy">
+              <td style="font-weight:600; color:#5b117e; padding: 0.3em 0.7em;">Validation accuracy</td>
+              <td style="padding: 0.3em 0.7em;">{{ modelInternals.validation_accuracy | percent:'1.0-2' }}</td>
+            </tr>
+            <tr *ngIf="modelInternals.test_accuracy">
+              <td style="font-weight:600; color:#5b117e; padding: 0.3em 0.7em;">Test accuracy</td>
+              <td style="padding: 0.3em 0.7em;">{{ modelInternals.test_accuracy | percent:'1.0-2' }}</td>
+            </tr>
+          </table>
+        </div>
+      </app-numeric-prediction-result>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
+      new window.bootstrap.Popover(popoverTriggerEl);
+    });
+  });
+</script>

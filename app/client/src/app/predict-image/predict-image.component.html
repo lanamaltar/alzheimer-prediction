@@ -1,0 +1,110 @@
+<div style="margin-bottom: 2rem;">
+  <h2 style="color: #5b117e; font-size: 1.8rem; font-weight: bold; text-align: center;">Model Information</h2>
+  <p style="text-align: center; font-size: 1.1rem; color: #5b117e; margin-top: 1rem;">This system uses a deep learning model based on ResNet50, a well-known convolutional neural network.</p>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem;">
+    <div style="background: #f3e5f5; padding: 1rem; border-radius: 1rem; display: flex; align-items: center; height: 150px;">
+      <img src="assets/20.png" alt="Transfer Learning" style="width: 120px; height: auto; margin-right: 1rem;">
+      <div>
+        <h3 style="color: #5b117e; font-size: 1.3rem; font-weight: bold;">Transfer Learning:</h3>
+        <p style="font-size: 1rem; color: #333;">The model starts from a ResNet50 pre-trained on ImageNet and is fine-tuned for Alzheimer’s MRI classification.</p>
+      </div>
+    </div>
+    <div style="background: #ede7f6; padding: 1rem; border-radius: 1rem; display: flex; align-items: center; height: 150px;">
+      <img src="assets/21.png" alt="Custom Layers" style="width: 120px; height: auto; margin-right: 1rem;">
+      <div>
+        <h3 style="color: #5b117e; font-size: 1.3rem; font-weight: bold;">Custom Layers:</h3>
+        <p style="font-size: 1rem; color: #333;">The final layer was replaced with a new classifier tailored for 4 categories:</p>
+        <p style="font-size: 1rem; color: #333;">Non Demented, Very Mild Dementia, Mild Dementia and Moderate Dementia.</p>
+      </div>
+    </div>
+    <div style="background: #e8eaf6; padding: 1rem; border-radius: 1rem; display: flex; align-items: center; height: 150px;">
+      <img src="assets/22.png" alt="Regularization" style="width: 120px; height: auto; margin-right: 1rem;">
+      <div>
+        <h3 style="color: #5b117e; font-size: 1.3rem; font-weight: bold;">Regularization:</h3>
+        <p style="font-size: 1rem; color: #333;">Strong dropout layers (70%) and batch normalization were added to reduce overfitting and improve generalization.</p>
+      </div>
+    </div>
+    <div style="background: #d1c4e9; padding: 1rem; border-radius: 1rem; display: flex; align-items: center; height: 150px;">
+      <img src="assets/23.png" alt="Training Strategy" style="width: 120px; height: auto; margin-right: 1rem;">
+      <div>
+        <h3 style="color: #5b117e; font-size: 1.3rem; font-weight: bold;">Training Strategy:</h3>
+        <p style="font-size: 1rem; color: #333;">Early layers of ResNet are frozen at first so they keep their learned features.</p>
+        <p style="font-size: 1rem; color: #333;">Only the final layers are trained initially. Later, layers are progressively “unfrozen” for fine-tuning.</p>
+      </div>
+    </div>
+    <div style="background: #c5cae9; padding: 1rem; border-radius: 1rem; display: flex; align-items: center; height: 150px;">
+      <img src="assets/24.png" alt="Data Handling" style="width: 120px; height: auto; margin-right: 1rem;">
+      <div>
+        <h3 style="color: #5b117e; font-size: 1.3rem; font-weight: bold;">Data Handling:</h3>
+        <p style="font-size: 1rem; color: #333;">The MRI dataset was split into training (70%), validation (15%), and testing (15%).</p>
+        <p style="font-size: 1rem; color: #333;">Data augmentation (rotation, flipping, affine transformations, color jitter, random erasing) was used to make the model more robust.</p>
+      </div>
+    </div>
+    <div style="background: #b39ddb; padding: 1rem; border-radius: 1rem; display: flex; align-items: center; height: 150px;">
+      <img src="assets/25.png" alt="Performance" style="width: 120px; height: auto; margin-right: 1rem;">
+      <div>
+        <h3 style="color: #5b117e; font-size: 1.3rem; font-weight: bold;">Performance:</h3>
+        <p style="font-size: 1rem; color: #333;">The model achieved strong accuracy on the test set, supported by confusion matrices to analyze class-by-class results.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="display: flex; flex-direction: row; gap: 2.2rem; align-items: stretch; justify-content: center; margin-top: 2rem;">
+  <!-- Info Card -->
+  <div class="form-card predict-image result-page-container info-card" style="flex: 1 1 0; min-width: 260px; max-width: 600px; display: flex; flex-direction: column; justify-content: stretch; height: auto; box-sizing: border-box;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; margin-bottom: 1.2rem;">
+      <h2 class="mb-0" style="font-size: 1.5rem; font-weight: 700; color: #5b117e;">Upload Specifications</h2>
+    </div>
+    <div style="font-size: 1rem; color: #444; margin-bottom: 0.7rem; display: flex; flex-direction: column; gap: 0.7em;">
+      <div style="display: flex; align-items: flex-start; gap: 0.7em;"><span style="color:#5b117e; font-size:1.2em;">&#10003;</span>Accepted formats: <b>JPG, JPEG, PNG</b></div>
+      <div style="display: flex; align-items: flex-start; gap: 0.7em;"><span style="color:#5b117e; font-size:1.2em;">&#10003;</span>File size limit: <b>5MB</b></div>
+      <div style="display: flex; align-items: flex-start; gap: 0.7em;"><span style="color:#5b117e; font-size:1.2em;">&#10003;</span>Image should be a valid <b>brain MRI scan</b></div>
+      <div style="display: flex; align-items: flex-start; gap: 0.7em;"><span style="color:#5b117e; font-size:1.2em;">&#10003;</span>Image will be resized automatically</div>
+      <div style="display: flex; align-items: flex-start; gap: 0.7em;"><span style="color:#5b117e; font-size:1.2em;">&#10003;</span>Color/grayscale both accepted</div>
+    </div>
+    <div style="font-size: 0.97em; color: #888; margin-top: auto;">For best results, use a clear, properly oriented MRI image.</div>
+  </div>
+  <!-- Upload Form Card -->
+  <div class="form-card predict-image result-page-container" style="flex: 1 1 0; min-width: 260px; max-width: 600px; display: flex; flex-direction: column; justify-content: stretch; height: auto; box-sizing: border-box;">
+    <!-- Header -->
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; margin-bottom: 1.2rem;">
+      <h2 class="mb-0" style="font-size: 1.5rem; font-weight: 700; color: #5b117e;">
+        MRI Prediction
+      </h2>
+    </div>
+    <form (ngSubmit)="onSubmit()" #form="ngForm" enctype="multipart/form-data" style="margin-bottom: 1.2rem;">
+      <div style="margin-bottom:1.2rem;">
+        <label for="mriFile" style="font-weight:600; color:#333; display:block; margin-bottom:0.7rem;">Upload MRI Image</label>
+        <div class="custom-file-upload">
+          <input type="file" id="mriFile" (change)="onFileChange($event)" accept="image/*,.nii,.nii.gz,.dcm" required>
+          <label for="mriFile" class="upload-btn">
+            <span *ngIf="!selectedFile">Choose file</span>
+            <span *ngIf="selectedFile">{{ selectedFile.name }}</span>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="predict-btn"
+        [disabled]="loading || !selectedFile">Predict</button>
+    </form>
+    <!-- Error Message -->
+    <div *ngIf="error" style="color:#b71c1c; margin-top:1rem;">{{ error }}</div>
+    <!-- Loading Message -->
+    <div *ngIf="loading" style="margin-top:1.2rem; color:#888;" [hidden]="!loading">Predicting...</div>
+  </div>
+</div>
+
+<app-image-predict-result *ngIf="result"
+  [result]="result.prediction ?? null"
+  [confidence]="result.confidence ?? null"
+  [probabilities]="result.probabilities ?? null"
+  [classNames]="result.classNames ?? null"
+  [entropy]="result.entropy ?? null"
+  [reliability]="result.reliability ?? null"
+  [timestamp]="result.timestamp ?? null"
+  [predictionId]="result.predictionId ?? null"
+  [modelInfo]="result.modelInfo ?? null"
+  [inputDetails]="result.inputDetails ?? null"
+  [gradCamUrl]="result.gradCamUrl ?? null"
+  [downloadLinks]="result.downloadLinks ?? null"
+  [disclaimer]="result.disclaimer ?? null"
+></app-image-predict-result>

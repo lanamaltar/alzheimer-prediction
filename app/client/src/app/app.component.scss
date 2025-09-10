@@ -1,0 +1,57 @@
+// Center everything on the page
+.landing-container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #ede7f6;
+}
+
+.icon-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100px;
+	height: 100px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 2px 12px rgba(79,140,255,0.08);
+	margin-bottom: 1rem;
+}
+
+.app-title {
+	font-size: 2.2rem;
+	font-weight: 700;
+	color: #3358e6;
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+
+.button-group {
+	display: flex;
+	gap: 1.5rem;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+.modern-btn {
+	min-width: 140px;
+	font-size: 1.1rem;
+	padding: 0.75rem 2.2rem;
+	border: none;
+	border-radius: 2rem;
+	background: linear-gradient(90deg, #4f8cff 0%, #3358e6 100%);
+	color: #fff;
+	font-weight: 600;
+	box-shadow: 0 2px 12px rgba(79,140,255,0.10);
+	transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+	outline: none;
+	cursor: pointer;
+}
+.modern-btn:hover, .modern-btn.active {
+	background: linear-gradient(90deg, #3358e6 0%, #4f8cff 100%);
+	box-shadow: 0 4px 18px rgba(51,88,230,0.13);
+	transform: translateY(-2px) scale(1.03);
+}

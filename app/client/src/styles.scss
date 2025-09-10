@@ -1,0 +1,17 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+
+// Import Open Sans (weights commonly used). Using @import here keeps single place control; could also be moved to index.html.
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+// Set a global font for the entire app – unify all elements to Open Sans first, with sensible fallbacks.
+body, html, input, button, select, textarea, .form-card, .sidebar, .sidebar-header, .result-page-container, table, th, td, h1, h2, h3, h4, h5, h6, div, span, p, ul, li, a {
+  font-family: 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}

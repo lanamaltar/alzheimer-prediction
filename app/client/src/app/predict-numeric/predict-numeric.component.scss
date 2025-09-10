@@ -1,0 +1,317 @@
+// Add spacing between explanation sections in the how-to-use card
+.how-to-use-explanations > strong {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+.how-to-use-explanations > strong:first-child {
+  margin-top: 0;
+}
+.how-to-use-explanations ul,
+.how-to-use-explanations br {
+  margin-bottom: 1em;
+}
+button.predict-btn {
+  background: linear-gradient(90deg, rgba(91, 17, 126, 0.95) 0%, rgba(91, 17, 126, 0.849) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button.predict-btn:hover {
+  background: linear-gradient(90deg, rgba(91, 17, 126, 1) 0%, rgba(91, 17, 126, 0.95) 100%);
+}
+:host ::ng-deep .form-card {
+  padding: 2rem;
+  border: 2px solid rgba(91, 17, 126, 0.18);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(91,17,126,0.07);
+  max-width: 420px;
+  min-width: 260px;
+  width: 100%;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.form-card:focus-within {
+  border-color: rgba(91, 17, 126, 0.38);
+  box-shadow: 0 6px 28px rgba(91,17,126,0.13);
+}
+
+.form-label {
+  color: rgba(91, 17, 126, 0.849);
+  font-weight: 600;
+}
+
+.form-control:focus {
+  border-color: rgba(91, 17, 126, 0.38);
+  box-shadow: 0 0 0 2px rgba(91, 17, 126, 0.13);
+}
+/* Let the page flow naturally inside shell content; no vertical centering */
+:host {
+  display: block;
+  min-height: auto;
+}
+
+form {
+  max-width: 400px;
+  width: 100%;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 2rem 2rem 1.5rem 2rem;
+  margin: 2rem 0;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: #2d3a4b;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.row.justify-content-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem; /* Add horizontal spacing between columns */
+  margin-top: 2.5rem; /* Add space below the header */
+}
+
+.col-12.col-md-5.col-lg-4,
+.col-12.col-md-7.col-lg-6 {
+  display: flex;
+  align-items: stretch;
+}
+
+.col-12.col-md-5.col-lg-4 {
+  justify-content: flex-end;
+}
+.col-12.col-md-7.col-lg-6 {
+  justify-content: flex-start;
+}
+
+.form-card {
+  margin-bottom: 1.5rem;
+  /* Existing styles... */
+}
+
+/* ===== Model Info cards (top section) ===== */
+.model-info-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* default: single column on small screens */
+  gap: 1.5rem; /* space between cards */
+  justify-items: center;
+  width: 100%;
+  margin: 0 auto 3rem auto; /* extra space below grid */
+}
+
+.model-info-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 15px rgba(91, 17, 126, 0.18);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 550px;
+  height: auto;          /* no fixed height -> no overflow overlap */
+  min-height: 240px;     /* optional baseline height */
+  background: #ede7f6;   /* default; individual cards can override with inline gradient if needed */
+  box-sizing: border-box;
+  overflow: hidden;      /* clip any internal overflow */
+}
+
+.model-info-card img {
+  width: 22%;
+  max-width: 22%;
+  flex: 0 0 22%;         /* lock image column */
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+/* Ensure text column can shrink without forcing overflow */
+.model-info-card > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.model-info-card h3 {
+  color: #5b117e;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.model-info-card p,
+.model-info-card ul,
+.model-info-card li,
+.model-info-card span {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.alzheimer-section {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #5b117e;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  margin-top: 3rem; /* Match the spacing before the header on the dashboard page */
+}
+
+.explanation-and-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.explanation {
+  text-align: left; /* Align text to the left */
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 2rem;
+  flex: 1; /* Ensure it takes up space on the left */
+}
+
+.explanation ul {
+  list-style: none; /* Remove default bullets */
+  padding-left: 1.5rem; /* Add padding for custom bullets */
+}
+
+.explanation ul li {
+  margin-bottom: 2.5rem; /* Increased spacing between sections */
+  position: relative;
+  padding-left: 2rem; /* Space for custom bullet */
+  line-height: 1.4; /* Adjust line height for readability */
+}
+
+.explanation ul li::before {
+  content: '\2713'; /* Unicode for a modern checkmark bullet */
+  color: #5b117e; /* Match application theme */
+  font-size: 1.3rem; /* Adjust bullet size */
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+}
+
+.explanation ul li strong {
+  display: inline; /* Keep the title on the same line as the explanation */
+  margin-bottom: 0; /* Remove any spacing below the title */
+  color: #5b117e; /* Highlight important text */
+}
+
+.explanation ul li:last-child {
+  margin-bottom: 0; /* Remove margin for the last item */
+}
+
+.form-and-result {
+  display: flex;
+  flex-direction: row-reverse; /* Reverse the order to place the form on the right */
+  justify-content: space-between;
+  gap: 2rem; /* horizontal gap between form and explanation */
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 2rem; /* ensure it's clearly below the cards grid */
+}
+
+.form-container {
+  flex: 2;
+  min-width: 60%;
+  display: flex;
+  justify-content: center; /* Center the form horizontally */
+  transform: none; /* avoid accidental overlap shifts */
+}
+
+.result-container {
+  flex: 1;
+  min-width: 35%;
+}
+
+.explanation h3 {
+  color: #5b117e; /* Purple color */
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+.explanation-title {
+  color: #5b117e; /* Purple color */
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+@media (min-width: 768px) {
+  .row.justify-content-center {
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 2.5rem;
+  }
+  .form-card {
+    margin-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+  .col-12.col-md-5.col-lg-4,
+  .col-12.col-md-7.col-lg-6 {
+    height: 100%;
+    align-items: stretch;
+  }
+}
+
+/* Desktop: exactly 2 columns -> 2 rows of 2 cards */
+@media (min-width: 992px) {
+  .model-info-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* On small and tablet screens, and also when sidebar is open at medium widths, show explanation above the form */
+@media (max-width: 1199.98px) {
+  .model-info-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+  .model-info-card img {
+    width: 120px;
+    max-width: 120px;
+    flex: 0 0 auto;
+    margin-bottom: 1rem;
+  }
+  .form-and-result { flex-direction: column-reverse; gap: 1.5rem; }
+  .form-container { min-width: 100%; }
+}
+
+/* When the shell indicates the sidebar is open, stack earlier to avoid squish */
+.sidebar-open .content-container .form-and-result {
+  flex-direction: column-reverse;
+  gap: 1.5rem;
+}

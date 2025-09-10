@@ -1,0 +1,46 @@
+<nav class="sidebar" [class.open]="sidebarOpen">
+  <div class="logo-details">
+    <div class="logo_name">BrainScan</div>
+    <i [ngClass]="sidebarOpen ? 'bx bx-menu-alt-right' : 'bx bx-menu'" id="btn" (click)="toggleSidebar()" role="button" aria-label="Toggle sidebar"></i>
+  </div>
+  <ul class="nav-list">
+    
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <i class="bx bx-grid-alt"></i>
+        <span class="links_name">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+    <li>
+      <a routerLink="/predict/image" routerLinkActive="active">
+        <i class="bx bx-pie-chart-alt-2"></i>
+        <span class="links_name">MRI Prediction</span>
+      </a>
+      <span class="tooltip">MRI Prediction</span>
+    </li>
+    <li>
+      <a routerLink="/predict/numeric" routerLinkActive="active">
+        <i class="bx bx-bar-chart-alt-2"></i>
+        <span class="links_name">Numeric Prediction</span>
+      </a>
+      <span class="tooltip">Numeric Prediction</span>
+    </li>
+    <li>
+      <a routerLink="/history" routerLinkActive="active">
+        <i class="bx bx-folder"></i>
+        <span class="links_name">History</span>
+      </a>
+      <span class="tooltip">History</span>
+    </li>
+    <li class="profile">
+      <div class="profile-details">
+        <div class="name_job">
+          <div class="name">Logged in</div>
+          <div class="job">User</div>
+        </div>
+      </div>
+      <i class="bx bx-log-out" id="log_out"></i>
+    </li>
+  </ul>
+</nav>

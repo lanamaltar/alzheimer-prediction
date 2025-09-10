@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+.app-hero {
+  max-width: 1100px;
+  margin: 2rem auto 1.5rem auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.app-hero .hero-content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 2rem;
+}
+.app-hero .hero-text {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.app-hero h1 {
+  margin: 0 0 0.75rem 0;
+  color: #5b117e;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  position: static;
+}
+.app-hero h1::after {
+  content: none;
+}
+.app-hero p {
+  margin: 0;
+  color: #5b117e;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+.app-hero .hero-visual {
+  display: none;
+}
+.app-hero .hero-illustration {
+  display: none;
+}
+
+
+/* removed old animations */
+
+@media (max-width: 900px) {
+  .app-hero .hero-content { grid-template-columns: 1fr; }
+  .app-hero .hero-visual { display: none; }
+  .app-hero .hero-text { padding: 0; }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  margin-top: 2.5rem;
+  min-height: 70vh;
+  justify-content: flex-start;
+}
+
+.dashboard h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(91, 17, 126, 0.849);
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 2rem;
+  /* Center within available content area */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboard-cards .card {
+  background: linear-gradient(135deg, rgba(245, 235, 255, 0.8), rgba(235, 225, 255, 0.9)); /* Light purple gradient */
+  //border: 2px solid rgba(91, 17, 126, 0.5); /* Retained purple outline */
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px rgba(91, 17, 126, 0.25);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 220px;
+  justify-content: flex-start; /* Align content to the top */
+  padding-left: 1rem; /* Add consistent padding to align content */
+  padding-right: 1rem;
+  text-align: center; /* Center text horizontally */
+}
+
+.card h3 {
+  color: rgba(91, 17, 126, 0.849);
+  margin-bottom: 1.2rem;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  margin-top: 1.5rem; /* Ensure consistent top margin */
+  text-align: center; /* Ensure text is centered */
+  margin-left: 0; /* Remove left margin */
+  margin-right: 0; /* Remove right margin */
+  min-height: 3rem; /* Add consistent height to align titles */
+}
+
+.card p {
+  text-align: center; /* Ensure text is centered */
+  margin-top: 1.5rem; /* Adjust spacing to bring text slightly down */
+  margin-left: 0; /* Remove left margin */
+  margin-right: 0; /* Remove right margin */
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.card button {
+  background: linear-gradient(90deg, rgba(91, 17, 126, 0.95) 0%, rgba(91, 17, 126, 0.849) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.card button:hover {
+  background: linear-gradient(90deg, rgba(91, 17, 126, 1) 0%, rgba(91, 17, 126, 0.95) 100%);
+}
+.card.recent .empty {
+  color: #b39ddb;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.empty {
+  text-align: center; /* Center the text horizontally */
+  margin: 1rem 0; /* Add spacing around the text */
+  font-size: 1.1rem; /* Slightly larger font size */
+  color: #b39ddb; /* Match the app's theme */
+}
+
+.alzheimer-section {
+  background: #f8f6fc; /* Light background to match the app's theme */
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alzheimer-section h2 {
+  color: #5b117e; /* Primary theme color */
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.alzheimer-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  /* Center the cards grid */
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 200px; /* Set a consistent height for all images */
+  object-fit: cover; /* Ensure the image fits within the dimensions */
+  border-bottom: 2px solid #ede7f6;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  color: #7e57c2;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem; /* Ensure all titles have the same top margin */
+  text-align: center; /* Align titles to the center */
+  margin-left: 0; /* Remove left margin */
+  margin-right: 0; /* Remove right margin */
+  min-height: 3rem; /* Add consistent height to align titles */
+}
+
+.card p {
+  text-align: center; /* Align text to the center */
+  margin-top: 1.5rem; /* Adjust spacing to bring text slightly down */
+  margin-left: 0; /* Remove left margin */
+  margin-right: 0; /* Remove right margin */
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.card:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  padding-left: 1rem; /* Align content with the Overview card */
+  padding-right: 1rem;
+}
+
+.card:nth-child(2) h3 {
+  margin-top: 1.5rem; /* Ensure consistent top margin */
+  text-align: center; /* Align title to the center */
+}
+
+.card:nth-child(2) p {
+  margin-top: 0; /* Remove extra spacing */
+  text-align: center; /* Align text to the center */
+}
+
+.card:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  padding-left: 1rem; /* Align content with other cards */
+  padding-right: 1rem;
+}
+
+.card:nth-child(3) h3 {
+  margin-top: 1.5rem; /* Ensure consistent top margin */
+  text-align: center; /* Align title to the center */
+}
+
+.card:nth-child(3) p {
+  margin-top: 0; /* Remove extra spacing */
+  text-align: center; /* Align text to the center */
+}
+
+.card:nth-child(2), .card:nth-child(4) {
+  h3 {
+    margin-top: 1.5rem; /* Match title position to Overview and Biological Changes cards */
+    text-align: center; /* Align titles to the center */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+    min-height: 3rem; /* Ensure consistent height for titles */
+  }
+
+  p {
+    margin-top: 1rem; /* Match text position to Overview and Biological Changes cards */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+    text-align: center; /* Align text to the center */
+  }
+}
+
+.ml-section-wrapper {
+  background: #ffffff; /* Neutral white background to match the app's theme */
+  padding: 3rem; /* Add padding around the section */
+  border-radius: 1.5rem; /* Rounded corners */
+  box-shadow: 0 6px 18px rgba(91, 17, 126, 0.2); /* Subtle shadow for depth */
+  margin-top: 2rem; /* Add spacing above the section */
+}
+
+/* The HTML uses .ml-section (not .ml-section-wrapper) — center and constrain it */
+.ml-section {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ml-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.ml-benefit-card {
+  background: #ede7f6; /* Light purple background */
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(91, 17, 126, 0.15);
+  padding: 1.5rem;
+  flex: 1 1 calc(33% - 2rem); /* Responsive cards */
+  text-align: center;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ml-benefit-card h4 {
+  color: #5b117e;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.ml-benefit-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.ml-benefit-card p span {
+  display: inline-block; /* Ensure visibility */
+  font-weight: bold;
+  color: #5b117e;
+  margin-bottom: 0.5rem;
+}

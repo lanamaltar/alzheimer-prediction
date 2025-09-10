@@ -1,0 +1,56 @@
+<div class="svgWrapper" #svgContainer>
+  <svg [attr.viewBox]="'0 0 ' + width + ' ' + height" preserveAspectRatio="xMidYMid meet">
+    <g class="g-main">
+  <!-- Plot frame -->
+  <rect class="plot-frame"
+    [attr.x]="margin.left" [attr.y]="margin.top"
+    [attr.width]="width - margin.left - margin.right"
+    [attr.height]="height - margin.top - margin.bottom" />
+      <!-- Axes -->
+      <g class="g-axes">
+        <!-- X axis line -->
+        <line [attr.x1]="margin.left" [attr.y1]="axisY" [attr.x2]="width - margin.right" [attr.y2]="axisY" class="axis-line" />
+        <!-- Y axis line -->
+        <line [attr.x1]="axisX" [attr.y1]="margin.top" [attr.x2]="axisX" [attr.y2]="height - margin.bottom" class="axis-line" />
+
+        <!-- X ticks -->
+        <g class="g-xticks">
+          <ng-container *ngFor="let t of xTicks">
+            <line [attr.x1]="t.x" [attr.y1]="axisY" [attr.x2]="t.x" [attr.y2]="axisY + 5" class="tick" />
+            <text [attr.x]="t.x" [attr.y]="axisY + 16" text-anchor="middle" class="tick-label">{{ t.label }}</text>
+          </ng-container>
+        </g>
+
+        <!-- Y ticks -->
+        <g class="g-yticks">
+          <ng-container *ngFor="let t of yTicks">
+            <line [attr.x1]="axisX - 5" [attr.y1]="t.y" [attr.x2]="axisX" [attr.y2]="t.y" class="tick" />
+            <text [attr.x]="axisX - 8" [attr.y]="t.y + 4" text-anchor="end" class="tick-label">{{ t.label }}</text>
+          </ng-container>
+        </g>
+
+        <!-- Labels -->
+        <text [attr.x]="(width - margin.left - margin.right)/2 + margin.left" [attr.y]="height - 6" text-anchor="middle" class="axis-title">{{ xLabel }}</text>
+    <text [attr.x]="12"
+      [attr.y]="(height - margin.top - margin.bottom)/2 + margin.top"
+      [attr.transform]="'rotate(-90 ' + 12 + ' ' + ((height - margin.top - margin.bottom)/2 + margin.top) + ')'"
+      text-anchor="middle" class="axis-title">{{ yLabel }}</text>
+      </g>
+      
+      <g class="g-line">
+        <path [attr.d]="linePath" stroke="#7e57c2" stroke-width="2" fill="none"></path>
+      </g>
+      <g class="g-circles">
+        <ng-container *ngFor="let circle of circles; trackBy: circleTrackBy">
+          <g class="g-circles-wrap"
+             (click)="onDataPointClicked(circle.data)"
+             (mouseenter)="onDataPointHover(circle.data)"
+             (mouseleave)="onDataPointHover(null)">
+            <circle class="circle-outer" [attr.cx]="circle.cx" [attr.cy]="circle.cy" [attr.r]="circle.radius + 5" stroke="#7e57c2" fill="none" opacity="0.25"></circle>
+            <circle class="circle" [attr.cx]="circle.cx" [attr.cy]="circle.cy" [attr.r]="circle.radius" fill="#b39ddb" stroke="#5b117e" stroke-width="1"></circle>
+          </g>
+        </ng-container>
+      </g>
+    </g>
+  </svg>
+</div>

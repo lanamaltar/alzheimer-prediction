@@ -1,0 +1,143 @@
+<div class="history">
+  <h2>History</h2>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <!-- MRI Predictions Table -->
+  <div>
+    <h3 style="margin-top: 0.5rem;">MRI Predictions</h3>
+    <table class="history-table" *ngIf="imageItems?.length; else noMri">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Prediction</th>
+          <th>Confidence</th>
+          <th>Original</th>
+          <th>Grad-CAM</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let it of imageItems">
+          <td>{{ it.date || '-' }}</td>
+          <td>
+            <div>{{ it.result }}</div>
+            <div *ngIf="getDementiaRuleLabel(it) as label" style="color: #5b117e; font-size: 0.95rem; margin-top: 0.15rem; font-weight: 400;">
+              {{ label }}
+            </div>
+          </td>
+          <td>{{ it.confidence | percent:'1.0-2' }}</td>
+          <td>
+            <img *ngIf="getUrl(it.origUrl) as u" [src]="u" alt="original"
+                 class="thumb clickable" (click)="openLightbox(it.origUrl, 'Original image')" />
+          </td>
+          <td>
+            <img *ngIf="getUrl(it.gradCamUrl) as g" [src]="g" alt="gradcam"
+                 class="thumb clickable" (click)="openLightbox(it.gradCamUrl, 'Grad-CAM')" />
+          </td>
+          <td>
+            <div class="details-grid">
+              <details>
+                <summary>Probabilities</summary>
+                <div *ngIf="it.classNames; else noProbs">
+                  <table>
+                    <tr *ngFor="let stage of ['Non Demented','Very Mild Dementia','Mild Dementia']">
+                      <td>{{ stage }}</td>
+                      <td>{{ getStageProbabilityForItem(it, stage) | number:'1.0-2' }}%</td>
+                    </tr>
+                  </table>
+                </div>
+                <ng-template #noProbs><span>No data</span></ng-template>
+              </details>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noMri>
+      <div class="empty">No MRI predictions yet.</div>
+    </ng-template>
+    <div class="actions" *ngIf="nextCursorImage">
+      <button class="load-more" (click)="loadMoreImage()" [disabled]="loadingImage">Load more MRI Predictions</button>
+    </div>
+  </div>
+
+  <!-- Numeric Predictions Table -->
+  <div style="margin-top: 1.5rem;">
+    <h3>Numeric Predictions</h3>
+    <table class="history-table" *ngIf="numericItems?.length; else noNum">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Prediction</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let it of numericItems">
+          <td>{{ it.date || '-' }}</td>
+          <td>
+            <div>{{ mapBinaryLabel(it.result) }}</div>
+            <div *ngIf="getNumericExplanation(it) as nex" style="margin-top: 0.35rem; color: #5b117e; font-size: 0.85rem; line-height: 1.15; max-width: 380px;">
+              {{ nex }}
+            </div>
+          </td>
+          <td>
+            <div class="details-grid">
+              <details>
+                <summary>Probabilities</summary>
+                <div *ngIf="it.classNames as clsList; else noProbs">
+                  <table>
+                    <tr *ngFor="let cls of clsList">
+                      <td>{{ mapBinaryLabel(cls) }}</td>
+                      <td>
+                        <ng-container *ngIf="getProb(it, cls) as p; else dash">{{ p | number:'1.0-2' }}</ng-container>
+                        <ng-template #dash>-</ng-template>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <ng-template #noProbs><span>No data</span></ng-template>
+              </details>
+              <details>
+                <summary>Input Data</summary>
+                <div *ngIf="it.features as vals; else noInput">
+                  <table>
+                    <ng-template #noVal>-</ng-template>
+                    <tr *ngFor="let name of featureNames; let i = index">
+                      <td>{{ name }}</td>
+                      <td>
+                        <ng-container *ngIf="vals && i < vals.length; else noVal">{{ formatFeatureValue(i, vals[i]) }}</ng-container>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <ng-template #noInput><span>No input</span></ng-template>
+              </details>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noNum>
+      <div class="empty">No numeric predictions yet.</div>
+    </ng-template>
+    <div class="actions" *ngIf="nextCursorNumeric">
+      <button class="load-more" (click)="loadMoreNumeric()" [disabled]="loadingNumeric">Load more Numeric Predictions</button>
+    </div>
+  </div>
+
+  <!-- Global empty when both empty -->
+  <div class="empty" *ngIf="!imageItems?.length && !numericItems?.length">No history yet.</div>
+
+  <!-- Global Load more removed; per-section buttons handle pagination -->
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" *ngIf="lightboxOpen" (click)="closeLightbox()">
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <button class="lightbox-close" (click)="closeLightbox()" aria-label="Close">×</button>
+      <img *ngIf="lightboxSrc" [src]="lightboxSrc" [alt]="lightboxAlt" />
+      <div class="caption" *ngIf="lightboxAlt">{{ lightboxAlt }}</div>
+    </div>
+  </div>
+</div>

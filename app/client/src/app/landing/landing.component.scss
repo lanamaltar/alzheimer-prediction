@@ -1,0 +1,104 @@
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(250, 240, 255, 0.8), rgba(240, 230, 255, 0.9)); /* Lighter gradient */
+}
+
+.icon-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px; /* Slightly larger square dimensions */
+  height: 120px; /* Slightly larger square dimensions */
+  background: url('/assets/ikona.png') center center/contain no-repeat; /* Retained contain for better fitting */
+  box-shadow: 0 6px 24px rgba(154, 15, 219, 0.285);
+  margin-bottom: 1.5rem;
+  border-radius: 12px; /* Rounded edges for a softer look */
+  overflow: hidden;
+}
+
+.icon-placeholder img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.icon-placeholder img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.icon-placeholder img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.18);
+  background: transparent;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #8f63e1; /* Retained heading color */
+  margin-bottom: 2rem;
+  text-align: center;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+.button-group {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.modern-btn {
+  min-width: 140px;
+  font-size: 1.1rem;
+  padding: 0.75rem 2.2rem;
+  border: none;
+  border-radius: 2rem;
+  //background: #b99fe9; /* Updated button color */
+  background: #8f63e1;
+  color: #fff; /* Adjusted text color for contrast */
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.1);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  outline: none;
+  cursor: pointer;
+}
+
+.modern-btn:hover {
+  background: #7a4fb3; /* Adjusted hover color to better match the new button color */
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.13);
+  transform: translateY(-2px) scale(1.03);
+}
+
+
+button, .landing-btn {
+  background: #b99fe9; /* Updated button color */
+  color: #fff; /* Adjusted text color for contrast */
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:hover, .landing-btn:hover {
+  background: #7a4fb3; /* Adjusted hover color to better match the new button color */
+}

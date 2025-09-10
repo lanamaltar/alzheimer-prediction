@@ -1,0 +1,47 @@
+/* Highlighted headings in purple */
+.highlight-purple, h4.result-explanation, h5.entered-data {
+  color: #5b117e;
+  font-weight: 600;
+}
+button.predict-btn {
+  background: linear-gradient(90deg, rgba(91, 17, 126, 0.95) 0%, rgba(91, 17, 126, 0.849) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button.predict-btn:hover {
+  background: linear-gradient(90deg, rgba(91, 17, 126, 1) 0%, rgba(91, 17, 126, 0.95) 100%);
+}
+.result-page-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px rgba(91, 17, 126, 0.08);
+}
+
+h2 {
+  color: #5b117e;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.alert-success {
+  font-size: 1.2rem;
+}
+
+ul {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  background: #5b117e;
+  border: none;
+}
